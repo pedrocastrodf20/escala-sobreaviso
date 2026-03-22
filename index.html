@@ -99,6 +99,16 @@
             font-weight: 600;
             color: var(--color-text-secondary);
         }
+        .block-size-individual {
+            width: 65px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .block-size-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+        }
         .btn {
             padding: 12px 24px;
             border: none;
@@ -145,12 +155,102 @@
         .schedule-table th { background: var(--color-primary); color: white; }
         .weekend { background: #fef3c7 !important; }
         .holiday { background: #fee2e2 !important; }
+
+        .holidays-config {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        .holidays-config h3 { margin-bottom: 12px; }
+        .holiday-input-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .holiday-input-row input[type="date"] {
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            flex: 0 0 180px;
+        }
+        .holiday-input-row select {
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            flex: 0 0 150px;
+        }
+        .holiday-input-row input[type="text"] {
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            flex: 1;
+            min-width: 180px;
+        }
+        .btn-add-holiday {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--color-danger);
+            color: white;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-add-holiday:hover { opacity: 0.85; }
+        .holiday-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .holiday-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #fca5a5;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .holiday-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+        }
+        .holiday-tag.facultativo {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: #fcd34d;
+        }
+        .holiday-tag .remove-tag {
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .holiday-tag .remove-tag:hover { opacity: 1; }
+        .holiday-hint {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
         
         .analyst-change td { border-top: 3px solid #000 !important; } /* Destaque troca analista */
         .month-divider td {
             background-color: #e2e8f0 !important;
             font-weight: bold !important;
-            padding: 2px !important; /* Padding reduzido */
+            padding: 2px !important;
             letter-spacing: 2px;
             border: 1px solid var(--color-border) !important;
         }
@@ -175,6 +275,60 @@
         .summary-item strong { display: block; font-size: 12px; color: var(--color-text-secondary); }
         .summary-item span { font-size: 20px; font-weight: 700; }
 
+        .priority-notice {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: #eff6ff;
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+        .priority-notice strong {
+            color: var(--color-primary);
+            font-style: normal;
+        }
+
+        .distribution-mode {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        .distribution-mode h3 { margin-bottom: 12px; }
+        .mode-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .mode-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .mode-option:hover {
+            border-color: var(--color-primary);
+        }
+        .mode-option.active {
+            border-color: var(--color-primary);
+            background: #eff6ff;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        .mode-option input[type="radio"] {
+            accent-color: var(--color-primary);
+        }
+
         @media print {
             body * { visibility: hidden; }
             .schedule-container, .schedule-container * { visibility: visible; }
@@ -182,8 +336,9 @@
             header, .config-panel, .actions { display: none !important; }
             .summary { page-break-before: always; margin-top: 50px; border: 1px solid var(--color-border); }
             .analyst-change td { border-top: 3px solid #000 !important; }
-            .month-divider td { background-color: #e2e8f0 !important; -webkit-print-color-adjust: exact; }
-            .weekend { background-color: #fef3c7 !important; -webkit-print-color-adjust: exact; }
+            .month-divider td { background-color: #e2e8f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .weekend { background-color: #fef3c7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .holiday { background-color: #fee2e2 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -200,15 +355,42 @@
                     <label>Data de Início (dia 21):</label>
                     <input type="text" id="startDate" value="21/02/2026" placeholder="DD/MM/AAAA">
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="blockSizeGroup">
                     <label>Tamanho do Bloco (dias):</label>
                     <input type="number" id="blockSize" value="7">
+                </div>
+            </div>
+
+            <div class="distribution-mode">
+                <h3>⚙️ Modo de Distribuição</h3>
+                <div class="mode-selector">
+                    <label class="mode-option active" id="modeAutoLabel">
+                        <input type="radio" name="distMode" value="auto" checked onchange="toggleDistributionMode()"> Automático (Blocos Iguais)
+                    </label>
+                    <label class="mode-option" id="modeManualLabel">
+                        <input type="radio" name="distMode" value="manual" onchange="toggleDistributionMode()"> Manual (Blocos Individuais)
+                    </label>
                 </div>
             </div>
 
             <div class="team-config">
                 <h3>👥 Equipe de Sobreaviso</h3>
                 <div id="teamMembers"></div>
+            </div>
+
+            <div class="holidays-config">
+                <h3>📅 Inserir Feriados Adicionais</h3>
+                <div class="holiday-input-row">
+                    <input type="date" id="customHolidayInput" title="Selecione a data do feriado">
+                    <select id="holidayType">
+                        <option value="Feriado">Feriado</option>
+                        <option value="Facultativo">Facultativo</option>
+                    </select>
+                    <input type="text" id="holidayName" placeholder="Nome do feriado (ex: Corpus Christi)">
+                    <button class="btn-add-holiday" onclick="addCustomHoliday()">➕ Adicionar</button>
+                </div>
+                <p class="holiday-hint">Adicione pontos facultativos, feriados locais ou outros dias que devem ser tratados como feriado (24h).</p>
+                <div class="holiday-tags" id="holidayTags"></div>
             </div>
 
             <div class="actions">
@@ -241,19 +423,133 @@
     </div>
 
     <script>
+        const STORAGE_KEY = 'customHolidays_v3';
         const analystList = ["Pedro Castro", "Hudson Mota", "Daniel Vinicius", "Daniel Fernando"];
-        const holidays = ['01/01/2026', '18/04/2026', '21/04/2026', '01/05/2026', '18/06/2026', '07/09/2026', '12/10/2026', '02/11/2026', '15/11/2026', '25/12/2026'];
+        const holidays = ['01/01/2026', '21/04/2026', '01/05/2026', '18/06/2026', '07/09/2026', '12/10/2026', '02/11/2026', '15/11/2026', '25/12/2026'];
+        let customHolidays = []; // Array de objetos: { date, type, name }
         let currentScheduleData = [];
 
+        // --- LocalStorage ---
+        function saveCustomHolidays() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(customHolidays));
+        }
+
+        function loadCustomHolidays() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    customHolidays = JSON.parse(data);
+                }
+            } catch (e) {
+                customHolidays = [];
+            }
+        }
+
+        // --- Gerenciamento de Feriados Customizados ---
+        function addCustomHoliday() {
+            const inputDate = document.getElementById('customHolidayInput');
+            const inputType = document.getElementById('holidayType');
+            const inputName = document.getElementById('holidayName');
+
+            const value = inputDate.value;
+            if (!value) return alert('Selecione uma data!');
+
+            const type = inputType.value;
+            const name = inputName.value.trim();
+
+            // Validação: se Feriado, nome é obrigatório
+            if (type === 'Feriado' && !name) {
+                return alert('Para o tipo "Feriado", o preenchimento do nome é obrigatório!');
+            }
+
+            const [y, m, d] = value.split('-');
+            const dateStr = `${d}/${m}/${y}`;
+
+            if (customHolidays.some(h => h.date === dateStr)) return alert('Esta data já foi adicionada!');
+            if (holidays.includes(dateStr)) return alert('Esta data já é um feriado nacional!');
+
+            customHolidays.push({ date: dateStr, type: type, name: name });
+            customHolidays.sort((a, b) => {
+                const [da, ma, ya] = a.date.split('/').map(Number);
+                const [db, mb, yb] = b.date.split('/').map(Number);
+                return new Date(ya, ma - 1, da) - new Date(yb, mb - 1, db);
+            });
+
+            inputDate.value = '';
+            inputName.value = '';
+            saveCustomHolidays();
+            renderCustomHolidayTags();
+        }
+
+        function removeCustomHoliday(dateStr) {
+            customHolidays = customHolidays.filter(h => h.date !== dateStr);
+            saveCustomHolidays();
+            renderCustomHolidayTags();
+        }
+
+        function renderCustomHolidayTags() {
+            const container = document.getElementById('holidayTags');
+            container.innerHTML = customHolidays.map(h => {
+                const label = h.name ? `${h.date} - ${h.type}: ${h.name}` : `${h.date} - ${h.type}`;
+                const tagClass = h.type === 'Facultativo' ? 'holiday-tag facultativo' : 'holiday-tag';
+                return `<span class="${tagClass}">${label} <span class="remove-tag" onclick="removeCustomHoliday('${h.date}')" title="Remover">✕</span></span>`;
+            }).join('');
+        }
+
+        // --- Busca de feriado customizado por data ---
+        function findCustomHoliday(dateStr) {
+            return customHolidays.find(h => h.date === dateStr) || null;
+        }
+
+        // --- Modo de Distribuição ---
+        function getDistributionMode() {
+            return document.querySelector('input[name="distMode"]:checked').value;
+        }
+
+        function toggleDistributionMode() {
+            const mode = getDistributionMode();
+            const blockSizeGroup = document.getElementById('blockSizeGroup');
+            const individualInputs = document.querySelectorAll('.block-size-individual');
+            const individualLabels = document.querySelectorAll('.block-size-label');
+            const autoLabel = document.getElementById('modeAutoLabel');
+            const manualLabel = document.getElementById('modeManualLabel');
+
+            if (mode === 'auto') {
+                blockSizeGroup.style.display = '';
+                individualInputs.forEach(el => el.style.display = 'none');
+                individualLabels.forEach(el => el.style.display = 'none');
+                autoLabel.classList.add('active');
+                manualLabel.classList.remove('active');
+            } else {
+                blockSizeGroup.style.display = 'none';
+                individualInputs.forEach(el => el.style.display = 'inline-block');
+                individualLabels.forEach(el => el.style.display = 'inline');
+                autoLabel.classList.remove('active');
+                manualLabel.classList.add('active');
+            }
+        }
+
+        // --- Inicialização ---
         function init() {
+            loadCustomHolidays();
+            renderCustomHolidayTags();
+
             const container = document.getElementById('teamMembers');
             for (let i = 0; i < 4; i++) {
                 const div = document.createElement('div');
                 div.className = 'team-member';
-                div.innerHTML = `<select class="analyst-select" onchange="syncSelections()"><option value="">Selecione um analista...</option></select><span class="hours-display" id="hr-${i}">0h</span>`;
+                div.innerHTML = `
+                    <select class="analyst-select" onchange="syncSelections()">
+                        <option value="">Selecione um analista...</option>
+                    </select>
+                    <span class="block-size-label">Dias:</span>
+                    <input type="number" class="block-size-individual" id="blockIndiv-${i}" value="7" min="1" max="31" title="Tamanho do bloco para este analista">
+                    <span class="hours-display" id="hr-${i}">0h</span>
+                `;
                 container.appendChild(div);
             }
             syncSelections();
+            toggleDistributionMode();
         }
 
         function syncSelections() {
@@ -273,11 +569,29 @@
             });
         }
 
+        // --- Geração da Escala ---
         function generateSchedule() {
             const startStr = document.getElementById('startDate').value;
-            const blockSize = parseInt(document.getElementById('blockSize').value);
+            const mode = getDistributionMode();
+            const globalBlockSize = parseInt(document.getElementById('blockSize').value);
             const team = Array.from(document.querySelectorAll('.analyst-select')).map(s => s.value).filter(v => v);
             if (team.length < 2) return alert('Selecione os analistas!');
+
+            // Monta o array de tamanho de blocos por analista
+            let blockSizes;
+            if (mode === 'manual') {
+                // Coleta os tamanhos individuais na ordem dos selects com valor
+                const allSelects = document.querySelectorAll('.analyst-select');
+                blockSizes = [];
+                allSelects.forEach((s, i) => {
+                    if (s.value) {
+                        const indivInput = document.getElementById(`blockIndiv-${i}`);
+                        blockSizes.push(parseInt(indivInput.value) || 7);
+                    }
+                });
+            } else {
+                blockSizes = team.map(() => globalBlockSize);
+            }
 
             const [d, m, y] = startStr.split('/').map(Number);
             let current = new Date(y, m - 1, d);
@@ -296,9 +610,15 @@
             while (current <= end) {
                 const dateStr = current.toLocaleDateString('pt-BR');
                 const isWE = current.getDay() === 0 || current.getDay() === 6;
-                const isHD = holidays.includes(dateStr);
+                const customHD = findCustomHoliday(dateStr);
+                const isHD = holidays.includes(dateStr) || customHD !== null;
                 const dayName = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'][current.getDay()];
-                const base = { date: dateStr, dayName, resp: team[memberIdx], isWE, isHD, month: current.getMonth() };
+                
+                // Monta o objeto base com informações do feriado customizado
+                const base = { 
+                    date: dateStr, dayName, resp: team[memberIdx], isWE, isHD, month: current.getMonth(),
+                    customHolidayName: customHD ? (customHD.name ? `${customHD.type}: ${customHD.name}` : customHD.type) : null
+                };
 
                 if (isWE || isHD) {
                     currentScheduleData.push({...base, start: '00:00', end: '00:00', h: 24});
@@ -310,12 +630,17 @@
                 }
 
                 dayCount++;
-                if (dayCount >= blockSize) { memberIdx = (memberIdx + 1) % team.length; dayCount = 0; }
+                const currentBlockSize = blockSizes[memberIdx];
+                if (dayCount >= currentBlockSize) { 
+                    memberIdx = (memberIdx + 1) % team.length; 
+                    dayCount = 0; 
+                }
                 current.setDate(current.getDate() + 1);
             }
             render(team, memberHours);
         }
 
+        // --- Renderização da Tabela ---
         function render(team, memberHours) {
             const tbody = document.getElementById('scheduleBody');
             tbody.innerHTML = '';
@@ -333,15 +658,20 @@
                 lastR = e.resp;
                 let rowClass = (e.isWE ? 'weekend ' : '') + (e.isHD ? 'holiday ' : '') + (isChange ? 'analyst-change' : '');
 
+                // Monta o conteúdo da coluna "Dia da Semana" com nome do feriado customizado
+                const holidayLabel = e.customHolidayName 
+                    ? `${e.dayName}<br><small style="color: var(--color-danger); font-weight: bold;">[${e.customHolidayName}]</small>` 
+                    : e.dayName;
+
                 if (e.split && e.start === '00:00') {
                     const next = currentScheduleData[i+1];
                     const r1 = tbody.insertRow(); r1.className = rowClass;
-                    r1.innerHTML = `<td rowspan="2">${e.date}</td><td rowspan="2">${e.dayName}</td><td rowspan="2"><strong>${e.resp}</strong></td><td>${e.start}</td><td>${e.end}</td><td rowspan="2"><strong>12:00</strong></td>`;
+                    r1.innerHTML = `<td rowspan="2">${e.date}</td><td rowspan="2">${holidayLabel}</td><td rowspan="2"><strong>${e.resp}</strong></td><td>${e.start}</td><td>${e.end}</td><td rowspan="2"><strong>12:00</strong></td>`;
                     const r2 = tbody.insertRow(); r2.className = rowClass.replace('analyst-change','');
                     r2.innerHTML = `<td>${next.start}</td><td>${next.end}</td>`;
                 } else if (!e.split) {
                     const r = tbody.insertRow(); r.className = rowClass;
-                    r.innerHTML = `<td>${e.date}</td><td>${e.dayName}</td><td><strong>${e.resp}</strong></td><td>${e.start}</td><td>${e.end}</td><td><strong>24:00</strong></td>`;
+                    r.innerHTML = `<td>${e.date}</td><td>${holidayLabel}</td><td><strong>${e.resp}</strong></td><td>${e.start}</td><td>${e.end}</td><td><strong>24:00</strong></td>`;
                 }
             });
 
@@ -357,6 +687,7 @@
             document.getElementById('scheduleOutput').style.display = 'block';
         }
 
+        // --- Exportação ---
         function copyToClipboard() {
             if (currentScheduleData.length === 0) return alert('Gere a escala primeiro!');
             let text = "Data\tDia\tAnalista\tInício\tFim\tHoras\n";
