@@ -621,11 +621,11 @@
                 };
 
                 if (isWE || isHD) {
-                    currentScheduleData.push({...base, start: '00:00', end: '00:00', h: 24});
+                    currentScheduleData.push({...base, start: '00:00', end: '23:59', h: 24});
                     memberHours[memberIdx] += 24;
                 } else {
                     currentScheduleData.push({...base, start: '00:00', end: '07:00', h: 7, split: true});
-                    currentScheduleData.push({...base, start: '19:00', end: '00:00', h: 5, split: true});
+                    currentScheduleData.push({...base, start: '19:00', end: '23:59', h: 5, split: true});
                     memberHours[memberIdx] += 12;
                 }
 
